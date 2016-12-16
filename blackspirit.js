@@ -15,22 +15,97 @@ client.Dispatcher.on(events.GATEWAY_READY, e => {
 
 //All Commands
 client.Dispatcher.on(events.MESSAGE_CREATE, e => {
-  if(!e.message.author.bot){
-    if(e.message.content == '?bd help' || '?bd halp' || '?bd'){
-      console.log(e.message.author.username);
-      e.message.channel.sendMessage(
-        'To get more in-depth information on commands, type: ?bd <command> help\n'+
-        '?bd pong - To test if the Bot is functioning correctly.\n'+
-        '?bd news - To display the most recent news article from the Black Desert Website\n'+
-        '?bd add - Link to add this bot to your server.\n'+
-        '?bd support - Displays ways to contact the creator.'
-      );
+    if(!e.message.author.bot){
+        if(e.message.content == '?bd ping'){
+            e.message.channel.sendMessage('pong');
+        }
     }
-  }
 });
 
+//All HELP commands.
 client.Dispatcher.on(events.MESSAGE_CREATE, e => {
-  if(e.message.content == '?bd ping'){
-    e.message.channel.sendMessage('pong');
-  }
+    if(!e.message.author.bot){
+        if(e.message.content == '?bd help'){
+            e.message.channel.sendMessage(e.message.author.mention+
+                '\n\n__**LIST OF COMMANDS**__\n\n'+
+                '?bd help - Brings up the help menu\n'+
+                '?bd add - Adds the bot to your channel\n'+
+                '?bd ping - Check if the bot is online\n'+
+                '?bd news - Shows the most recent news'
+            );
+        }
+    }
+});
+client.Dispatcher.on(events.MESSAGE_CREATE, e => {
+    if(!e.message.author.bot){
+        if(e.message.content == '?bd halp'){
+            e.message.channel.sendMessage(e.message.author.mention+
+                '\n\n__**LIST OF COMMANDS**__\n\n'+
+                '**?bd help** - Brings up the help menu\n'+
+                '**?bd add** - Adds the bot to your channel\n'+
+                '**?bd ping** - Check if the bot is online\n'+
+                '**?bd news** - Shows the most recent news'
+            );
+        }
+    }
+});
+
+//Adding the bot to your server.
+client.Dispatcher.on(events.MESSAGE_CREATE, e => {
+    if(!e.message.author.bot){
+        if(e.message.content == '?bd add'){
+            e.message.channel.sendMessage(e.message.author.mention);
+            e.message.channel.sendMessage('', false, {
+                color: 0xFF0000,
+                title: 'Click this to add me!',
+                url: 'https://discordapp.com/oauth2/authorize?client_id=259115394588082176&scope=bot'
+            });
+        }
+    }
+});
+client.Dispatcher.on(events.MESSAGE_CREATE, e => {
+    if(!e.message.author.bot){
+        if(e.message.content == '?bd addbot'){
+            e.message.channel.sendMessage(e.message.author.mention);
+            e.message.channel.sendMessage('', false, {
+                color: 0xFF0000,
+                title: 'Click this to add me!',
+                url: 'https://discordapp.com/oauth2/authorize?client_id=259115394588082176&scope=bot'
+            });
+        }
+    }
+});
+client.Dispatcher.on(events.MESSAGE_CREATE, e => {
+    if(!e.message.author.bot){
+        if(e.message.content == '?bd ad'){
+            e.message.channel.sendMessage(e.message.author.mention);
+            e.message.channel.sendMessage('', false, {
+                color: 0xFF0000,
+                title: 'Click this to add me!',
+                url: 'https://discordapp.com/oauth2/authorize?client_id=259115394588082176&scope=bot'
+            });
+        }
+    }
+});
+
+//All NEWS commands.
+client.Dispatcher.on(events.MESSAGE_CREATE, e => {
+    if(!e.message.author.bot){
+        if(e.message.content == '?bd news'){
+            e.message.channel.sendMessage(e.message.author.mention+
+                ' https://www.blackdesertonline.com/news/view/283'
+            );
+        }
+    }
+});
+
+//All TWITTER commands.
+client.Dispatcher.on(events.MESSAGE_CREATE, e => {
+    if(!e.message.author.bot){
+        if(e.message.content == '?bd tweet'){
+            e.message.channel.sendMessage(e.message.author.mention+
+                ' https://twitter.com/BDO_News'
+            );
+        }
+    }
 });
