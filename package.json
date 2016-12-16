@@ -1,0 +1,11 @@
+{  "name": "black-spirit-bot"
+,  "version": "1.0.0"
+,  "description": "A bot specifically crafted for Black Desert Online Guild Discord Channels."
+,  "main": "bot.js"
+,  "scripts":
+   { "start": "nodemon blackspirit.js" }
+,  "author": "Pierrce#6398"
+,  "license": "MIT"
+,  "dependencies":
+   { "discordie": "^0.5.5" }
+}
