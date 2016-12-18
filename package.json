@@ -3,7 +3,7 @@
 ,  "description": "A bot specifically crafted for Black Desert Online Guild Discord Channels."
 ,  "main": "bot.js"
 ,  "scripts":
-   { "start": "nodemon blackspirit.js" }
+   { "start": "nodemon BlackSpirit.js" }
 ,  "author": "Pierrce#6398"
 ,  "license": "MIT"
 ,  "dependencies":

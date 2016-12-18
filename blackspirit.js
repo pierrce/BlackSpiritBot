@@ -1,4 +1,9 @@
 var Discordie = require('discordie');
+var Help = require('./Help.js');
+var Util = require('./Util.js');
+var Add = require('./Add.js');
+var Social = require('./Social.js');
+var Saying = require('./Saying.js');
 
 const events = Discordie.Events;
 const client = new Discordie();
@@ -13,99 +18,21 @@ client.Dispatcher.on(events.GATEWAY_READY, e => {
   console.log('Connected as: ' + client.User.username);
 });
 
-//All Commands
+//Check all commands
 client.Dispatcher.on(events.MESSAGE_CREATE, e => {
-    if(!e.message.author.bot){
-        if(e.message.content == '?bd ping'){
-            e.message.channel.sendMessage('pong');
-        }
-    }
-});
+    var isCommand = false;
 
-//All HELP commands.
-client.Dispatcher.on(events.MESSAGE_CREATE, e => {
     if(!e.message.author.bot){
-        if(e.message.content == '?bd help'){
-            e.message.channel.sendMessage(e.message.author.mention+
-                '\n\n__**LIST OF COMMANDS**__\n\n'+
-                '?bd help - Brings up the help menu\n'+
-                '?bd add - Adds the bot to your channel\n'+
-                '?bd ping - Check if the bot is online\n'+
-                '?bd news - Shows the most recent news'
-            );
-        }
-    }
-});
-client.Dispatcher.on(events.MESSAGE_CREATE, e => {
-    if(!e.message.author.bot){
-        if(e.message.content == '?bd halp'){
-            e.message.channel.sendMessage(e.message.author.mention+
-                '\n\n__**LIST OF COMMANDS**__\n\n'+
-                '**?bd help** - Brings up the help menu\n'+
-                '**?bd add** - Adds the bot to your channel\n'+
-                '**?bd ping** - Check if the bot is online\n'+
-                '**?bd news** - Shows the most recent news'
-            );
-        }
-    }
-});
 
-//Adding the bot to your server.
-client.Dispatcher.on(events.MESSAGE_CREATE, e => {
-    if(!e.message.author.bot){
-        if(e.message.content == '?bd add'){
-            e.message.channel.sendMessage(e.message.author.mention);
-            e.message.channel.sendMessage('', false, {
-                color: 0xFF0000,
-                title: 'Click this to add me!',
-                url: 'https://discordapp.com/oauth2/authorize?client_id=259115394588082176&scope=bot'
-            });
-        }
-    }
-});
-client.Dispatcher.on(events.MESSAGE_CREATE, e => {
-    if(!e.message.author.bot){
-        if(e.message.content == '?bd addbot'){
-            e.message.channel.sendMessage(e.message.author.mention);
-            e.message.channel.sendMessage('', false, {
-                color: 0xFF0000,
-                title: 'Click this to add me!',
-                url: 'https://discordapp.com/oauth2/authorize?client_id=259115394588082176&scope=bot'
-            });
-        }
-    }
-});
-client.Dispatcher.on(events.MESSAGE_CREATE, e => {
-    if(!e.message.author.bot){
-        if(e.message.content == '?bd ad'){
-            e.message.channel.sendMessage(e.message.author.mention);
-            e.message.channel.sendMessage('', false, {
-                color: 0xFF0000,
-                title: 'Click this to add me!',
-                url: 'https://discordapp.com/oauth2/authorize?client_id=259115394588082176&scope=bot'
-            });
-        }
-    }
-});
+        if(!isCommand){isCommand = Help(e)}
 
-//All NEWS commands.
-client.Dispatcher.on(events.MESSAGE_CREATE, e => {
-    if(!e.message.author.bot){
-        if(e.message.content == '?bd news'){
-            e.message.channel.sendMessage(e.message.author.mention+
-                ' https://www.blackdesertonline.com/news/view/283'
-            );
-        }
-    }
-});
+        if(!isCommand){isCommand = Util(e)}
 
-//All TWITTER commands.
-client.Dispatcher.on(events.MESSAGE_CREATE, e => {
-    if(!e.message.author.bot){
-        if(e.message.content == '?bd tweet'){
-            e.message.channel.sendMessage(e.message.author.mention+
-                ' https://twitter.com/BDO_News'
-            );
-        }
+        if(!isCommand){isCommand = Add(e)}
+
+        if(!isCommand){isCommand = Social(e)}
+
+        if(!isCommand){new Saying(e)}
+
     }
 });
